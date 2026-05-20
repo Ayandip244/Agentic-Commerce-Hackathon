@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SASHA — AI Commerce Support</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="noise-overlay"></div>
+
+  <div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M12 20C12 15.58 15.58 12 20 12C24.42 12 28 15.58 28 20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.6"/>
+            <path d="M20 8V5M20 35V32M8 20H5M35 20H32" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">SASHA</span>
+          <span class="brand-tagline">Commerce Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-section="chat" onclick="switchSection('chat', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+          <span>Support Chat</span>
+        </button>
+        <button class="nav-item" data-section="orders" onclick="switchSection('orders', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+          </svg>
+          <span>My Orders</span>
+        </button>
+        <button class="nav-item" data-section="returns" onclick="switchSection('returns', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polyline points="1 4 1 10 7 10"/>
+            <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+          </svg>
+          <span>Returns</span>
+        </button>
+        <button class="nav-item" data-section="wishlist" onclick="switchSection('wishlist', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+          <span>Wishlist</span>
+        </button>
+        <button class="nav-item" data-section="profile" onclick="switchSection('profile', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span>Profile</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-status">
+        <div class="status-dot"></div>
+        <span>SASHA is online</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <section class="section active" id="section-chat">
+        <header class="chat-header">
+          <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="chat-header-info">
+            <div class="avatar-wrap">
+              <div class="avatar-ring"></div>
+              <div class="avatar">S</div>
+            </div>
+            <div>
+              <h1 class="chat-title">SASHA</h1>
+              <p class="chat-subtitle">Your personal commerce assistant</p>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn" title="Clear chat" onclick="clearChat()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6l-1 14H6L5 6"/>
+                <path d="M10 11v6M14 11v6"/>
+                <path d="M9 6V4h6v2"/>
+              </svg>
+            </button>
+            <button class="icon-btn" title="New conversation" onclick="resetChat()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="messages-area" id="messages">
+          <div class="welcome-block" id="welcome-block">
+            <div class="welcome-orb"></div>
+            <h2 class="welcome-heading">Hello, I'm <em>SASHA</em></h2>
+            <p class="welcome-sub">Your intelligent commerce support companion. I can help you track orders, manage returns, find products, and much more.</p>
+            <div class="quick-chips" id="quick-chips">
+              <button class="chip" onclick="sendQuickMessage('Track my order')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Track Order
+              </button>
+              <button class="chip" onclick="sendQuickMessage('I want to return a product')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+                Start Return
+              </button>
+              <button class="chip" onclick="sendQuickMessage('Show me trending products')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                Trending Now
+              </button>
+              <button class="chip" onclick="sendQuickMessage('I have a payment issue')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                Payment Help
+              </button>
+              <button class="chip" onclick="sendQuickMessage('What are your shipping policies?')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                Shipping Info
+              </button>
+              <button class="chip" onclick="sendQuickMessage('Apply a discount coupon')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                Use Coupon
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="typing-indicator" id="typing-indicator">
+          <div class="typing-avatar">S</div>
+          <div class="typing-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="typing-label">SASHA is thinking…</span>
+        </div>
+
+        <footer class="chat-footer">
+          <div class="input-row">
+            <div class="input-wrap">
+              <textarea
+                id="user-input"
+                class="chat-input"
+                placeholder="Ask SASHA anything about your order, returns, products…"
+                rows="1"
+                onkeydown="handleKey(event)"
+                oninput="autoResize(this)"
+              ></textarea>
+            </div>
+            <button class="send-btn" id="send-btn" onclick="sendMessage()" aria-label="Send message">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </div>
+          <p class="footer-note">SASHA · Commerce Edition</p>
+        </footer>
+      </section>
+
+      <section class="section" id="section-orders">
+        <header class="page-header">
+          <button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+          <h2 class="page-title">My Orders</h2>
+        </header>
+        <div class="page-body">
+          <div class="orders-filter">
+            <button class="filter-btn active">All Orders</button>
+            <button class="filter-btn">Processing</button>
+            <button class="filter-btn">Shipped</button>
+            <button class="filter-btn">Delivered</button>
+          </div>
+          <div class="orders-list">
+            <div class="order-card">
+              <div class="order-card-top">
+                <div>
+                  <span class="order-id">#ORD-48291</span>
+                  <span class="order-date">May 18, 2026</span>
+                </div>
+                <span class="order-badge shipped">Shipped</span>
+              </div>
+              <div class="order-items-preview">
+                <div class="order-item-thumb" style="background: #e8d5c4;"></div>
+                <div class="order-item-thumb" style="background: #c4d5e8;"></div>
+              </div>
+              <div class="order-card-bottom">
+                <span class="order-total">$248.00</span>
+                <button class="order-track-btn" onclick="switchSection('chat', document.querySelector('[data-section=chat]')); setTimeout(() => sendQuickMessage('Track order #ORD-48291'), 300)">Track Package</button>
+              </div>
+            </div>
+            <div class="order-card">
+              <div class="order-card-top">
+                <div>
+                  <span class="order-id">#ORD-47103</span>
+                  <span class="order-date">May 10, 2026</span>
+                </div>
+                <span class="order-badge delivered">Delivered</span>
+              </div>
+              <div class="order-items-preview">
+                <div class="order-item-thumb" style="background: #d4e8c4;"></div>
+              </div>
+              <div class="order-card-bottom">
+                <span class="order-total">$89.99</span>
+                <button class="order-track-btn" onclick="switchSection('chat', document.querySelector('[data-section=chat]')); setTimeout(() => sendQuickMessage('I want to return order #ORD-47103'), 300)">Return Item</button>
+              </div>
+            </div>
+            <div class="order-card">
+              <div class="order-card-top">
+                <div>
+                  <span class="order-id">#ORD-46882</span>
+                  <span class="order-date">Apr 29, 2026</span>
+                </div>
+                <span class="order-badge processing">Processing</span>
+              </div>
+              <div class="order-items-preview">
+                <div class="order-item-thumb" style="background: #e8c4d4;"></div>
+                <div class="order-item-thumb" style="background: #e8e4c4;"></div>
+                <div class="order-item-thumb" style="background: #c4c8e8;"></div>
+              </div>
+              <div class="order-card-bottom">
+                <span class="order-total">$512.50</span>
+                <button class="order-track-btn" onclick="switchSection('chat', document.querySelector('[data-section=chat]')); setTimeout(() => sendQuickMessage('What is the status of order #ORD-46882?'), 300)">Ask SASHA</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="section-returns">
+        <header class="page-header">
+          <button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+          <h2 class="page-title">Returns & Refunds</h2>
+        </header>
+        <div class="page-body">
+          <div class="returns-hero">
+            <div class="returns-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <polyline points="1 4 1 10 7 10"/>
+                <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+              </svg>
+            </div>
+            <h3>Hassle-free Returns</h3>
+            <p>Return any item within 30 days of delivery. SASHA will guide you through the process.</p>
+            <button class="cta-btn" onclick="switchSection('chat', document.querySelector('[data-section=chat]')); setTimeout(() => sendQuickMessage('I want to start a return'), 300)">Start a Return with SASHA</button>
+          </div>
+          <div class="policy-grid">
+            <div class="policy-card">
+              <span class="policy-icon">📦</span>
+              <h4>Free Returns</h4>
+              <p>No cost to you. We cover all return shipping on eligible items.</p>
+            </div>
+            <div class="policy-card">
+              <span class="policy-icon">⚡</span>
+              <h4>Fast Refunds</h4>
+              <p>Refunds processed within 3–5 business days of item receipt.</p>
+            </div>
+            <div class="policy-card">
+              <span class="policy-icon">🔄</span>
+              <h4>Easy Exchange</h4>
+              <p>Prefer an exchange? We'll send the new item as soon as we receive yours.</p>
+            </div>
+            <div class="policy-card">
+              <span class="policy-icon">🛡️</span>
+              <h4>30-Day Window</h4>
+              <p>Generous 30-day return window on all standard purchases.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="section-wishlist">
+        <header class="page-header">
+          <button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+          <h2 class="page-title">Wishlist</h2>
+        </header>
+        <div class="page-body">
+          <div class="wishlist-grid">
+            <div class="wish-card">
+              <div class="wish-img" style="background: linear-gradient(135deg,#f5e6d3,#e8c9a0);"></div>
+              <div class="wish-info">
+                <h4>Artisan Leather Tote</h4>
+                <span class="wish-price">$189.00</span>
+                <div class="wish-actions">
+                  <button class="wish-cart-btn" onclick="switchSection('chat', document.querySelector('[data-section=chat]')); setTimeout(() => sendQuickMessage('I want to buy Artisan Leather Tote'), 300)">Add to Cart</button>
+                  <button class="wish-remove-btn">♡</button>
+                </div>
+              </div>
+            </div>
+            <div class="wish-card">
+              <div class="wish-img" style="background: linear-gradient(135deg,#d3e6f5,#a0c9e8);"></div>
+              <div class="wish-info">
+                <h4>Silk Evening Scarf</h4>
+                <span class="wish-price">$94.00</span>
+                <div class="wish-actions">
+                  <button class="wish-cart-btn" onclick="switchSection('chat', document.querySelector('[data-section=chat]')); setTimeout(() => sendQuickMessage('I want to buy Silk Evening Scarf'), 300)">Add to Cart</button>
+                  <button class="wish-remove-btn">♡</button>
+                </div>
+              </div>
+            </div>
+            <div class="wish-card">
+              <div class="wish-img" style="background: linear-gradient(135deg,#d3f5e6,#a0e8c9);"></div>
+              <div class="wish-info">
+                <h4>Ceramic Coffee Set</h4>
+                <span class="wish-price">$128.00</span>
+                <div class="wish-actions">
+                  <button class="wish-cart-btn" onclick="switchSection('chat', document.querySelector('[data-section=chat]')); setTimeout(() => sendQuickMessage('I want to buy Ceramic Coffee Set'), 300)">Add to Cart</button>
+                  <button class="wish-remove-btn">♡</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="section-profile">
+        <header class="page-header">
+          <button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+          <h2 class="page-title">My Profile</h2>
+        </header>
+        <div class="page-body">
+          <div class="profile-card">
+            <div class="profile-avatar-lg">A</div>
+            <div class="profile-info">
+              <h3 class="profile-name">Alex Monroe</h3>
+              <p class="profile-email">alex.monroe@email.com</p>
+              <span class="profile-badge">Premium Member</span>
+            </div>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-box">
+              <span class="stat-num">12</span>
+              <span class="stat-label">Total Orders</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">3</span>
+              <span class="stat-label">Returns</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">$1,842</span>
+              <span class="stat-label">Lifetime Spend</span>
+            </div>
+          </div>
+          <div class="profile-menu">
+            <button class="profile-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Edit Profile
+            </button>
+            <button class="profile-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Payment Methods
+            </button>
+            <button class="profile-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Saved Addresses
+            </button>
+            <button class="profile-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+              Notifications
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+  <script src="script.js"></script>
+</body>
+</html>
